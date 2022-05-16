@@ -5,16 +5,30 @@ const { response } = require('express');
 const bcrypt = require('bcryptjs');
 const Usuario = require('../models/usuario.models');
 const { generarJWT } = require('../helper/jwt');
+const { query } = require('express');
 
 
 //Devuelve una lista de usuarios
 const getUsuarios = async ( req, res) => {
+    //PAGINACION*********************************ojo
+  const desde = Number(req.query.desde) || 0;
+   
+  const [ usuarios, total] = await Promise.all([
     
-    const usuarios = await Usuario.find({},'nombre email google');
+    Usuario
+         .find({},'nombre email role google img')
+         .skip( desde )
+         .limit( 5 ),
+    Usuario.count(),
+   
+
+  ]);
 
     res.json({
        ok:true,
-      uid: req.uid
+       usuarios,
+       total
+       
    });
  
  }

@@ -12,7 +12,7 @@ const dbConnection = async () =>{
             useNewUrlParser: true
 
           });
-          console.log('DB ON-LINE :)');
+          console.log('DB ON-LINE ;)');
 
     } catch (error) {
 

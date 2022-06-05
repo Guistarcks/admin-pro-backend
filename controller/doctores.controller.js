@@ -44,21 +44,76 @@ const doctor = new Doctor({
    }
       
    }
-   const actualizarDoctores = (req, res = response) =>{
-    res.json({
-     ok:true,
-     msg: 'ActualizarDoctor'
-   
-    });
-   
+
+
+const actualizarDoctores = async (req, res = response) =>{
+
+const idDoctor = req.params.id;
+const uid = req.uid;
+try {
+
+const doctor =await Doctor.findById (idDoctor);
+
+if(! doctor ){
+ return res.status ( 404 ).json({
+  ok:true,
+  msg:'Doctor no encontrado por id',
+
+ });
+}
+
+const cambiosDoctor ={ ... req.body, usuario: uid}
+const doctorActualizado = await Doctor.findByIdAndUpdate (idDoctor, cambiosDoctor, {new:true})
+
+res.json({
+ok: true,
+doctor: doctorActualizado})
+  
+} catch ( error ) {
+
+console.log( error );
+res.status( 500 ).json({
+
+ok:false,
+msg:'Hable con el administrador'
+
+});
+
+}
+ 
    }
 
-   const borrarDoctores = (req, res = response) =>{
-    res.json({
-     ok:true,
-     msg: 'BorrarDoctor'
+   const borrarDoctores = async (req, res = response) =>{
    
-    });
+    const idDoctor = req.params.id;
+    try {
+        
+    const doctor = await Doctor.findById ( idDoctor );
+
+    if(! doctor ){
+     return res.status ( 404 ).json({
+     ok:true, 
+     msg:'Doctor no encotrado por id'
+
+     });
+    }
+
+    await Doctor.findByIdAndDelete( idDoctor);
+    res.json({
+        ok:true,
+        msg: 'Doctor Borrado con éxito'
+      
+       });
+
+    } catch (error) {
+        console.log( error );
+       res.status( 500 ).json({
+       ok:false,
+       msg:'Hable con el administrador '
+
+       });
+    }
+     
    
    }
 module.exports = {

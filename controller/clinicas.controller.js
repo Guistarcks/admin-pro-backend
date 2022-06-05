@@ -46,21 +46,82 @@ const crearClinicas =  async (req, res = response) =>{
    }
    
    }
-   const actualizarClinicas = (req, res = response) =>{
-    res.json({
-     ok:true,
-     msg: 'ActualizarClinicas'
+   const actualizarClinicas = async (req, res = response) =>{
    
-    });
-   
+    const idClinica = req.params.id;
+    const uid = req.uid;
+     try {
+         
+          const clinica = await Clinicas.findById( idClinica );
+         
+          if(! clinica ){
+            return res.status( 404 ).json({
+                ok:true,
+                msg: 'Clinica no encontrada por id',
+                
+               });
+          }
+       
+       const cambiosClinicas ={  ...req.body, usuario: uid }
+       
+       const clinicaActualizada = await Clinicas.findByIdAndUpdate(idClinica, cambiosClinicas, {new:true} )
+
+
+       res.json({
+       ok:true,
+        clinica: clinicaActualizada
+       });
+      
+
+     } catch (error) {
+       console.log( error );
+        res.status(500).json({
+         
+           ok:false,
+           msg:'Hable con el administrador'
+
+        });
+        
+     }
    }
 
-   const borrarClinicas = (req, res = response) =>{
-    res.json({
-     ok:true,
-     msg: 'BorrarClinicas'
-   
-    });
+   const borrarClinicas = async (req, res = response) =>{
+  
+    const idClinica = req.params.id;
+  
+     try {
+         
+          const clinica = await Clinicas.findById( idClinica );
+         
+          if(! clinica ){
+            return res.status( 404 ).json({
+                ok:true,
+                msg: 'Clinica no encontrada por id',
+                
+               });
+          }
+       
+        await Clinicas.findByIdAndDelete( idClinica );
+     
+       res.json({
+       ok:true,
+       msg:'Clinica elimininada con éxito'
+       });
+      
+
+     } catch (error) {
+       console.log( error );
+        res.status(500).json({
+         
+           ok:false,
+           msg:'Hable con el administrador'
+
+        });
+        
+     }
+  
+  
+  
    
    }
 module.exports = {

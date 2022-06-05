@@ -2,7 +2,6 @@
 '/api/clinicas'
 
 */
-
 const { Router, response } = require('express');
 
 const { check } = require('express-validator');
@@ -35,12 +34,14 @@ crearClinicas
 
  router.put('/:id',
  [
-    
+   validarJWT,
+   check('nombre', 'El nombre de la Clinica es necesario').not().isEmpty(),
+   validarCampos
  ],
  actualizarClinicas 
   );
   router.delete('/:id',
- 
+  validarJWT,
   borrarClinicas 
    );
 

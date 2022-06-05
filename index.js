@@ -18,6 +18,9 @@ app.use( express.json());
 // BASE DE DATOS CONECTION
 dbConnection();
 
+//Directorio Public 
+app.use( express.static('public'));
+
 app.use('/api/usuarios', require('./routes/usuarios.router'));
 app.use('/api/clinicas', require('./routes/clinicas.router'));
 app.use('/api/doctores', require('./routes/doctores.router'));

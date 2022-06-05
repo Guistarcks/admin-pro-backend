@@ -17,7 +17,7 @@ try {
  if( !usuarioDB ){
    return res.status(404).json({
    ok:false,
-   msg:'Email no encontrado'
+   msg:'Email no encontrado',
 
    });
   }
@@ -27,7 +27,7 @@ try {
       if( !validarPassword ){
           return res.status(400).json({
           ok:false,
-          msg: 'Contraseña no valida'
+          msg: 'Contraseña no valida',
 
           });
       }
@@ -45,13 +45,15 @@ try {
   console.log(error)
   res.status(500).json({
    ok:false,
-   msg:'Hable con el administrador'
+   msg:'Hable con el administrador',
 
 
   });    
 }
-
 }
+
+
 module.exports = {
-    login
+    login,
+  
 }

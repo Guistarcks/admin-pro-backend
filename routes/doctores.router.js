@@ -35,12 +35,16 @@ crearDoctores
 
  router.put('/:id',
  [
-    
+    validarJWT,
+    check('nombre', 'El nombre del Doctor es necesario').not().isEmpty(),
+    check('clinica', 'El id Clinica debe de ser válido').isMongoId(),
+    validarCampos
  ],
  actualizarDoctores 
-  );
-  router.delete('/:id',
  
+ );
+  router.delete('/:id',
+  validarJWT,
   borrarDoctores 
    );
 

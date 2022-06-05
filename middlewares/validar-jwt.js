@@ -27,18 +27,13 @@ try {
     
     return res.status(401).json({
      ok:false,
-     msg: 'Token no valido'
+     msg: 'Token no valido',
 
     });
 }
 
 
-
-
 }
 
-module.exports = {
+module.exports = { validarJWT } ;
 
-validarJWT
-
-}

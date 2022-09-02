@@ -20,7 +20,7 @@ const DoctoreSchema = Schema({
         required:true 
     },
 
-});
+},{ collection: 'doctores'});
 // ESTA FUNCIÓN EXTRAE DEL OBJETO LA INFORMACIÓN QUE DESEA QUE NO SEA VISIBLE.OJO
 DoctoreSchema.method('toJSON', function() {
     //>
@@ -30,4 +30,4 @@ DoctoreSchema.method('toJSON', function() {
 
 })
 
-module.exports = model('Doctores', DoctoreSchema );
+module.exports = model('Doctor', DoctoreSchema );

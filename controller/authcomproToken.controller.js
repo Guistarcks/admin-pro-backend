@@ -7,10 +7,13 @@ const novoToken = async( req, res = response) =>{
 const idUser = req.uid;
 //Generar nuevoToken
 const token = await generarJWT (idUser);
+// Obtener el usuario por ID
+const usuario = await Usuario.findById (idUser);
 
 res.json({
 ok:true,
-token
+token,
+usuario
 
 });
 

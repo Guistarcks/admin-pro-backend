@@ -18,6 +18,8 @@ const getUsuarios = async ( req, res) => {
     Usuario
          .find({},'nombre email role google img')
          .skip( desde )
+         
+         //ESTE PUNTO PUBLICAMOS LA CANTIDAD DE DATOS A MOSTRAR
          .limit( 5 ),
     Usuario.count(),
    
@@ -32,9 +34,9 @@ const getUsuarios = async ( req, res) => {
    });
  
  }
- 
+
  //Función creación usuarios
- const crearUsuarios = async ( req, res = response ) => {
+   const crearUsuarios = async ( req, res = response ) => {
 
   const {nombre, password, email} = req.body;
  
@@ -48,7 +50,6 @@ const getUsuarios = async ( req, res) => {
      msg: 'El correo ya está registrado'
    });
   }
-
 
 
   const usuario = new Usuario( req.body );
@@ -81,10 +82,10 @@ const getUsuarios = async ( req, res) => {
 
 
   
-}
+  }
 
 //Función actualizar usuarios
-const actualizarUsuarios = async ( req, res = response ) =>{
+   const actualizarUsuarios = async ( req, res = response ) =>{
 
 // VALIDAR TOKEN Y COMPROBAR SI EL USUARIO CORRECTO.
 
@@ -136,8 +137,8 @@ const actualizarUsuarios = async ( req, res = response ) =>{
       
   }
   }
-//Función deletar usuarios
 
+//Función deletar usuarios
  const borrarUsuarios = async ( req, res) =>{
   
   const uid = req.params.id;

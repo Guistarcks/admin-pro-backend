@@ -25,4 +25,4 @@ ClinicaSchema.method('toJSON', function() {
 
 })
 
-module.exports = model('Clinicas', ClinicaSchema );
+module.exports = model('Clinica', ClinicaSchema );

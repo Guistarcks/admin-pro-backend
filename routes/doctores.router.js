@@ -15,12 +15,13 @@ const {
     getDoctores,
     crearDoctores,
     actualizarDoctores,
-    borrarDoctores
+    borrarDoctores,
+    getDoctoreById
 } = require ('../controller/doctores.controller');
 
 const router = Router();
 
-router.get('/', getDoctores );
+router.get('/',validarJWT, getDoctores );
 
 router.post('/',
 [
@@ -47,5 +48,9 @@ crearDoctores
   validarJWT,
   borrarDoctores 
    );
+router.get('/:id',
+   validarJWT,
+   getDoctoreById 
+    );
 
 module.exports = router;

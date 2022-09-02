@@ -6,9 +6,10 @@ const Doctor = require('../models/doctores.models');
 
 const getDoctores = async (req, res = response) =>{
 
+
 const doctores = await Doctor.find()
-                              .populate('usuario','nombre img');
-                              //.populate('clinica','nombre img')
+                              .populate('usuario','nombre img')
+                              .populate('clinica','nombre img')
                                                        
  res.json({
   ok:true,
@@ -16,7 +17,34 @@ const doctores = await Doctor.find()
 
  })
 
-}
+   }
+
+const getDoctoreById = async (req, res = response) =>{
+  const id = req.params.id;
+   try {
+    
+    const doctor = await Doctor.findById( id )
+                                .populate('usuario','nombre img')
+                                .populate('clinica','nombre img')
+    res.json({
+        ok:true,
+        doctor
+      
+       })
+
+   } catch (error) {
+    res.json({
+        ok:false,
+        msg:'Hable con el administrador'
+      
+       })
+      
+    
+   }
+   
+                                                           
+    
+    }
 
 const crearDoctores = async (req, res = response) =>{
    
@@ -26,7 +54,7 @@ const doctor = new Doctor({
  ...req.body
 });
 
-   try {
+   try {  
       
     const doctorDB = await doctor.save();
     res.json({
@@ -36,7 +64,7 @@ const doctor = new Doctor({
        });
 
    } catch (error) {
-       console.log(error);
+    console.log(error);
        res.status(500).json({
            ok:false,
            msg:'Hable con el administrador'
@@ -83,7 +111,7 @@ msg:'Hable con el administrador'
  
    }
 
-   const borrarDoctores = async (req, res = response) =>{
+const borrarDoctores = async (req, res = response) =>{
    
     const idDoctor = req.params.id;
     try {
@@ -120,5 +148,6 @@ module.exports = {
     getDoctores,
     crearDoctores,
     actualizarDoctores,
-    borrarDoctores
+    borrarDoctores,
+    getDoctoreById
 }

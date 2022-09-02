@@ -6,7 +6,7 @@ const getClinicas = async (req, res = response) =>{
 
 
  const clinicas = await Clinicas.find()
-                                .populate('usuario','nombre img')
+                               .populate('usuario','nombre img')
                                 
  res.json({
   ok:true,
@@ -124,9 +124,35 @@ const crearClinicas =  async (req, res = response) =>{
   
    
    }
+
+   //const getClinicas = async (req, res ) => {
+
+    //const desde = Number (req.query.desde) || 0;
+    
+    //const [clinicas, total ] = await Promise.all([
+       // Clinicas
+              // .find({},'usuario','nombre img')
+             //  .skip( desde )
+                
+               //ESTE PUNTO PUBLICAMOS LA CANTIDAD DE DATOS A MOSTRAR   
+               //  .limit( 5 ),
+               //  Clinicas.count(),
+   
+   // ]);
+                                  
+                                    
+    // res.json({
+     // ok:true,
+     // clinicas,
+     // total
+    // });
+    
+   // }
+
 module.exports = {
     getClinicas,
     crearClinicas,
     actualizarClinicas,
     borrarClinicas
 }
+

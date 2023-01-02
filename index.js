@@ -27,6 +27,8 @@ app.use('/api/doctores', require('./routes/doctores.router'));
 app.use('/api/todo', require('./routes/busquedas.router'));
 app.use('/api/login', require('./routes/auth.router'));
 app.use('/api/uploads', require('./routes/uploads.router'));
+app.use('/api/clientes', require('./routes/clientes.router'));
+app.use('/api/citasclientes', require('./routes/citaclientes.router'));
 app.listen(process.env.PORT, ()=>{
 
     console.log('Servidor conectado en el puerto'  + process.env.PORT);

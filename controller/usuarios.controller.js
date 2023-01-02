@@ -36,7 +36,7 @@ const getUsuarios = async ( req, res) => {
  }
 
  //Función creación usuarios
-   const crearUsuarios = async ( req, res = response ) => {
+  const crearUsuarios = async ( req, res = response ) => {
 
   const {nombre, password, email} = req.body;
  
